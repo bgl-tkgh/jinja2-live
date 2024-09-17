@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock %}
+
+{% block body %}
+
+<form name="action_data" method="POST" action="/list/{{ current_path }}">
+<input type="hidden" name="action" />
+<input type="hidden" name="name"/>
+<input type="hidden" name="entry"/>
+<input type="hidden" name="to" />
+<input type="hidden" name="path" />
+</form>
+
+
+     <form class="container">
+         <H2>list of known entries</H2>
+         <div id="rename_to"></div><br>
+         <div class="row">
+             <div class="col-md-10">
+                    <div class="row" style="background-color: #f0f0f0;">
+                         <div class="col-md-4"> Path</div>
+                    </div>
+                {% for path in paths.keys() | sort %}
+                    <div class="row">
+                         <div class="col-md-4">
+                                 <a href="/list/{{ paths[path]['link'] }}"> {{ path }}</A>
+                         </div>
+                    </div>
+                {% endfor %}
+             </div>
+         </div>
+
+         <div class="row" style="margin-top:24px">
+             <div class="col-md-10">
+                    <div class="row" style="background-color: #f0f0f0;">
+                         <div class="col-md-4"> Key </div>
+                         <div class="col-md-3"> Saved </div>
+                         <div class="col-md-2"> </div>
+                    </div>
+
+                {% for entry in entries.keys() | sort %}
+                    <div class="row">
+                         <div class="col-md-4">
+                                 <a href="/load/{{ entries[entry]['name'] }}" class="edithide{{loop.index}}" id="entry{{loop.index}}">
+                                    {{ entry }}
+                                 </A>
+                                 <input type="text" id="new_entry{{loop.index}}" class="editshow{{loop.index}}" value="{{entry}}" />
+                         </div>
+                         <div class="col-md-3">{{ entries[entry]['timestamp'] }}</div>
+                         <div class="col-md-2" id="menu{{loop.index}}">
+                                   <button type="button" class="btn btn-danger btn-xs edithide" 
+				           id="delete{{loop.index}}" value="Delete"
+                                           onClick="doDelete( {{loop.index}}, '{{ entries[entry]['name'] }}' )">
+                                       <i class="glyphicon glyphicon-trash"> </i>
+                                   </button>
+                                   <button type="button" class="btn btn-primary btn-xs pressme{{loop.index}} edithide"
+                                           id="rename_{{loop.index}}">
+                                       <i class="glyphicon glyphicon-pencil"> </i>
+                                   </button>
+                                   <button type="button" class="btn btn-danger btn-xs  editshow{{loop.index}} pressme{{loop.index}}"
+                                           id="cancel{{loop.index}}" value="Cancel" >
+                                       <i class="glyphicon glyphicon-remove"> </i>
+                                   </button>
+                                   <button type="button" class="btn btn-success btn-xs pressme{{loop.index}} editshow{{loop.index}}"
+                                           id="do_{{loop.index}}" onclick="doRename({{loop.index}}, '{{ entry }}')">
+                                       <i class="glyphicon glyphicon-ok"> </i>
+                                   </button>
+                         </div>
+                     </div>
+                {% endfor %}
+             </div>
+          </div>
+         <div class="row">
+             <div class="col-md-6">
+               <br>
+                   <button type="button" class="btn btn-primary btn-xs" id="home" onClick="location.href='/'">
+                                <i class="glyphicon glyphicon-home"></i> &nbsp; Return
+                   </button>
+                   <button type="button" class="btn btn-secondary btn-xs" id="save" onClick="location.href='/csv'">
+                                <i class="glyphicon glyphicon-floppy-save"></i> &nbsp; download database
+                   </button>
+             </div>
+         <div class="row">
+             <div class="col-md-6 pull-right">
+               <br>
+                total: {{ nb }} entries
+             </div>
+         </div>
+       </form>
+       <script>
+            {% for entry in entries %}
+               $(".editshow{{loop.index}}").hide();
+               // hide/show all grid buttons
+               $(".pressme{{loop.index}}").click( function() {
+                           $(".editshow{{loop.index}}").toggle();
+                           $(".edithide{{loop.index}}").toggle();
+                           $(".edithide").toggle();
+                  } );
+            {% endfor %}
+            // send rename_to POST request. Copy values into hidden form and apply
+            function doRename(row, from) {
+                 document.action_data.action.value = "rename";
+                 document.action_data.entry.value = from;
+                 document.action_data.to.value   = document.getElementById("new_entry" + row).value;
+                 document.action_data.path.value  = "{{ current_path }}"
+                 document.action_data.submit();
+            };
+	   // send delete POST request using full name and current_path (for new list)
+           function doDelete(row, full_name) {
+                 document.action_data.action.value = "delete";
+                 document.action_data.name.value = full_name;
+                 document.action_data.path.value  = "{{ current_path }}";
+                 document.action_data.submit();
+           };
+
+       </script>
+
+{% endblock %}
+
