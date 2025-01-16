@@ -45,14 +45,14 @@
                 <textarea id="render" spellcheck="false"></textarea>
             </div>
         </div>
-        <div class="row">
             <div class="col-md-2">
                 <h3>Values</h3>
             </div>
+        <div class="row">
             <div class="col-md-4">
                 <div style="font-size:small;display:inline">
                     <label><input type="radio" name="input_type" value="yaml" checked/> YAML</label>
-		    <br>
+                    <br>
                     <label><input type="radio" name="input_type" value="json"/> JSON</label>
                  </div>
             </div>
@@ -69,7 +69,7 @@
                     <button type="button" class="btn btn-success"  style="width:125px" id="convert" value="Convert">
                               <i class="glyphicon glyphicon-expand"> </i> &nbsp; Convert
                     </button>
-
+                    
                     <button type="button" class="btn btn-success pull-right"  
                             id="select" value="Clipboard" onClick="CopyToClipboard('render')">
                         <i class="glyphicon glyphicon-download-alt"> </i> &nbsp; To Clipboard
@@ -97,6 +97,18 @@
             </div>
   
         </div>
+
+        <h3>MarkDown Preview(Renderフォームをクリックしてください)</h3>
+        <div id="markdown" style="border: 1px solid #ccc; padding: 10px; margin-top: 10px;"></div>
+                <script>
+                    const markdownTextarea = document.getElementById('render');
+                    const previewDiv = document.getElementById('markdown');
+                    markdownTextarea.addEventListener('click', function() {
+                        const markdownText = markdownTextarea.value;
+                        previewDiv.innerHTML = marked.parse(markdownText); 
+                    });
+                </script>
+
         <br>
         <br>
         <div class="row">
@@ -120,4 +132,3 @@
         </div>
     </form>
 {% endblock %}
-
