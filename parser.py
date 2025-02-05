@@ -2,7 +2,7 @@
 from __future__ import absolute_import, print_function
 
 from flask import Flask, render_template, request, redirect, url_for, Response, send_from_directory
-from jinja2 import Environment, meta, exceptions
+from jinja2 import Environment, meta, exceptions, FileSystemLoader
 from random import choice
 import inspect
 import logging
@@ -286,8 +286,8 @@ def save():
 # ---------------
 @app.route('/convert', methods=['POST'])
 def convert():
-    jinja2_env = Environment()
-
+    fileSystemLoader = FileSystemLoader(searchpath="./common")
+    jinja2_env = Environment(loader=fileSystemLoader)
     # Load custom filters
     custom_filters = get_custom_filters_entrypoints()
     jinja2_env.filters.update(custom_filters)
