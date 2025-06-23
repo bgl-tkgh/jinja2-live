@@ -48,5 +48,5 @@ Need that docker is already installer.
 ```$ docker volume create Jinja2DB```
 - Run the container with docker port mapping and volume assignment 
 
-```$ docker run -rm -p 8080:8080 -v Jinja2DB:/opt jinja2-live```
+```$ docker run --rm -p 8080:8080 -v Jinja2DB:/opt jinja2-live```
 
