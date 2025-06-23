@@ -40,10 +40,10 @@ Need that docker is already installer.
 - Clone the application
 
 ```$ git clone https://github.com/PJO2/jinja2-live```
-- Build docker container
+- Build docker container using provided dockerfile
 
 ```$ docker build -t jinja2-live jinja2-live```
-- Run the container using the docker port mapping
+- Run the container with docker port mapping
 
 ```$ docker run -rm -p 8080:8080 jinja2-live```
 
