@@ -46,7 +46,10 @@ Need that docker is already installer.
 - Create a docker volume for the database persistance
 
 ```$ docker volume create Jinja2DB```
-- Run the container with docker port mapping and volume assignment 
+- Initialize the container with docker port mapping and volume assignment 
 
-```$ docker run --rm -p 8080:8080 -v Jinja2DB:/opt jinja2-live```
+```$ docker run -p 8080:8080 -v Jinja2DB:/opt jinja2-live```
+- Start it again using the existing volume :
+
+```$ docker start $(docker ps -a | grep jinja2-live | cut -d ' ' -f 1 | tail -1)```
 
