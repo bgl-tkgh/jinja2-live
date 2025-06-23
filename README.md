@@ -31,15 +31,19 @@ All you need is Python and preferably [pip](https://pypi.python.org/pypi/pip). C
 
 ### Install the application in the VM
 Copy script build-jinja2-live-on-alpine.sh in the root directory, than start it using
+
 ```ash build-jinja2-live-on-alpine.sh```
 
 ## Option III: Use jinja2-live in a container
 
 Need that docker is already installer.
 - Clone the application
+
 ```$ git clone https://github.com/PJO2/jinja2-live```
-- Build docker conatiner
+- Build docker container
+
 ```$ docker build -t jinja2-live jinja2-live```
 - Run the container using the docker port mapping
+
 ```$ docker run -rm -p 8080:8080 jinja2-live```
 
