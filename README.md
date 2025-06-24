@@ -16,14 +16,18 @@ All you need is Python and preferably [pip](https://pypi.python.org/pypi/pip). C
 
 # Install
 
-## Option I:  Clone + pip + init database
+## Option I:  Use the OVA in release
+
+Available [here](https://github.com/PJO2/jinja2-live/releases)
+
+## Option II:  Clone + pip + init database
 
     $ git clone https://github.com/PJO2/jinja2-live
     $ pip3 install -r requirements.txt
     $ python3 init_database.py
     $ python3 parser.py
 
-## Option II: Jinja2 Live Parser on Alpine Linux
+## Option III: Jinja2 Live Parser on Alpine Linux
 
 ### Prerequisites
 - Alpine Linux VM (tested on Alpine 3.19+)
@@ -37,7 +41,7 @@ than start it using
 
 ```ash build-jinja2-live-on-alpine.sh```
 
-## Option III: Use jinja2-live in a container
+## Option IV: Use jinja2-live in a container
 
 Need that docker is already installer.
 - Clone the application
