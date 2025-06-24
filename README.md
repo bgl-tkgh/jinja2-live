@@ -30,7 +30,10 @@ All you need is Python and preferably [pip](https://pypi.python.org/pypi/pip). C
   1Gb RAM, 1 CPU and 8gb hard Disk
 
 ### Install the application in the VM
-Copy script build-jinja2-live-on-alpine.sh in the root directory, than start it using
+Copy script build-jinja2-live-on-alpine.sh in the root directory, for instance with :
+
+```wget https://raw.githubusercontent.com/PJO2/jinja2-live/refs/heads/master/build-jinja2-live-on-alpine.sh```
+than start it using
 
 ```ash build-jinja2-live-on-alpine.sh```
 
