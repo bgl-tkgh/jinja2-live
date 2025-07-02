@@ -14,6 +14,8 @@ import sqlite3
 import os
 import csv
 import tempfile
+from dotenv import load_dotenv
+load_dotenv()
 
 # local modules (no extensions)
 CUSTOM_MODULES = ('netaddr_filters', 'json_query', 'thin_filters')
@@ -286,7 +288,7 @@ def save():
 # ---------------
 @app.route('/convert', methods=['POST'])
 def convert():
-    fileSystemLoader = FileSystemLoader(searchpath="./common")
+    fileSystemLoader = FileSystemLoader(searchpath=os.environ['SEARCH_PATH'])
     jinja2_env = Environment(loader=fileSystemLoader)
     # Load custom filters
     custom_filters = get_custom_filters_entrypoints()
